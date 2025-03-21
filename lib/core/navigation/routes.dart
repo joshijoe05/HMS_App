@@ -4,4 +4,5 @@ class Routes {
   static const String signUp = '/sign-up';
   static const String profileSetup = '/profile-setup';
   static const String mailSent = '/verify-mail';
+  static const String home = '/home';
 }

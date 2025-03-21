@@ -117,7 +117,7 @@ class AuthProvider extends ChangeNotifier {
         prefs.setString("refreshToken", r['data']['refreshToken']);
         userProvider.loadTokens();
         clearLoginData();
-        // router.go(Routes.bottomNav);
+        router.go(Routes.home);
         return true;
       },
     );
