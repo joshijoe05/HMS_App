@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-                (Dimensions.getHeight(context) * 0.28).round().height,
+                (Dimensions.getHeight(context) * 0.24).round().height,
                 Center(
                   child: RichText(
                     textAlign: TextAlign.center,
@@ -162,7 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       } else if (authProvider.passwordController.text.trim().length < 6) {
                         SnackbarService.showSnackbar("Password should be atleast 6 characters");
                       } else {
-                        // router.push(Routes.profile);
+                        router.push(Routes.profileSetup);
                       }
                     }
                   },

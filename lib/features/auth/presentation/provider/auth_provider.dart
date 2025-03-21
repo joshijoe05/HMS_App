@@ -32,7 +32,7 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController confirmPassController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  final String hostelId = "";
+  String? hostelId;
 
   final TextEditingController emailLoginController = TextEditingController();
   final TextEditingController passwordLoginController = TextEditingController();
@@ -62,14 +62,19 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signUp(bool isSocialLogin) async {
+  void onHostelChanged(String? hostel) {
+    hostelId = hostel;
+    notifyListeners();
+  }
+
+  Future<void> signUp() async {
     EasyLoading.show();
     final response = await userSignUp(UserSignUpParams(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
       fullName: nameController.text.trim(),
       contactNumber: phoneController.text.trim(),
-      hostelId: hostelId,
+      hostelId: hostelId!,
     ));
     EasyLoading.dismiss();
     response.fold(
