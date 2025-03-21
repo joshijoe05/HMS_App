@@ -82,6 +82,7 @@ class ApiRepositoryImpl implements ApiRepository {
   Future<Map<String, String>> _getHeaders({bool isProtected = true}) async {
     Map<String, String> headers = {};
     String? accessToken = userProvider.accessToken;
+    headers["Content-Type"] = "application/json";
     if (isProtected) {
       if (accessToken == null) {
         SnackbarService.showSnackbar("Session Expired. Please login again");

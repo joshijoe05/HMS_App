@@ -5,6 +5,7 @@ import 'package:hms_app/core/network/api_repository_impl.dart';
 import 'package:hms_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:hms_app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:hms_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:hms_app/features/auth/domain/usecases/user_login.dart';
 import 'package:hms_app/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:hms_app/features/auth/presentation/provider/auth_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,8 +37,14 @@ void _initAuth() {
     ..registerFactory<UserSignUp>(
       () => UserSignUp(serviceLocator()),
     )
+    ..registerFactory<UserLogin>(
+      () => UserLogin(serviceLocator()),
+    )
     ..registerLazySingleton<AuthProvider>(
       () => AuthProvider(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
         serviceLocator(),
       ),
     );
