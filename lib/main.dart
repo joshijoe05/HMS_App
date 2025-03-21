@@ -7,6 +7,7 @@ import 'package:hms_app/core/helper/snackbar.dart';
 import 'package:hms_app/core/navigation/go_router.dart';
 import 'package:hms_app/core/theme/app_theme.dart';
 import 'package:hms_app/features/auth/presentation/provider/auth_provider.dart';
+import 'package:hms_app/features/auth/presentation/provider/hostel_provider.dart';
 import 'package:hms_app/init_dependencies.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => NetworkProvider()),
         ChangeNotifierProvider(create: (context) => serviceLocator<UserProvider>()),
+        ChangeNotifierProvider(create: (context) => serviceLocator<HostelProvider>()),
         ChangeNotifierProvider(create: (context) => serviceLocator<AuthProvider>()),
       ],
       child: MaterialApp.router(

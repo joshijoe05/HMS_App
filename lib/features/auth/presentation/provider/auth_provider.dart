@@ -4,8 +4,10 @@ import 'package:hms_app/core/common/provider/user_provider.dart';
 import 'package:hms_app/core/helper/snackbar.dart';
 import 'package:hms_app/core/navigation/go_router.dart';
 import 'package:hms_app/core/navigation/routes.dart';
+import 'package:hms_app/features/auth/domain/entities/hostel_entity.dart';
 import 'package:hms_app/features/auth/domain/usecases/user_login.dart';
 import 'package:hms_app/features/auth/domain/usecases/user_sign_up.dart';
+import 'package:hms_app/features/auth/presentation/provider/hostel_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -13,11 +15,13 @@ class AuthProvider extends ChangeNotifier {
   UserProvider userProvider;
   SharedPreferences prefs;
   UserLogin userLogin;
+  HostelProvider hostelProvider;
   AuthProvider(
     this.userSignUp,
     this.prefs,
     this.userProvider,
     this.userLogin,
+    this.hostelProvider,
   );
 
   bool showPassword = false;
@@ -32,7 +36,7 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController confirmPassController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  String? hostelId;
+  HostelEntity? selectedHostel;
 
   final TextEditingController emailLoginController = TextEditingController();
   final TextEditingController passwordLoginController = TextEditingController();
@@ -63,7 +67,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void onHostelChanged(String? hostel) {
-    hostelId = hostel;
+    selectedHostel = hostelProvider.hostels.firstWhere((element) => element.name == hostel);
+    notifyListeners();
+  }
+
+  Future<void> initialize() async {
+    await hostelProvider.getAllHostels();
     notifyListeners();
   }
 
@@ -74,7 +83,7 @@ class AuthProvider extends ChangeNotifier {
       password: passwordController.text.trim(),
       fullName: nameController.text.trim(),
       contactNumber: phoneController.text.trim(),
-      hostelId: hostelId!,
+      hostelId: selectedHostel!.id,
     ));
     EasyLoading.dismiss();
     response.fold(

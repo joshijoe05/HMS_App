@@ -28,6 +28,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
+        authProvider.initialize();
         authProvider.nameController.addListener(_updateState);
         authProvider.phoneController.addListener(_updateState);
       },
@@ -96,8 +97,8 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                         showHeading: true,
                         heading: "Hostel",
                         onChanged: data.onHostelChanged,
-                        items: ["Hostel1", "Hostel2", "Hostel3"],
-                        item: data.hostelId,
+                        items: data.hostelProvider.hostels.map((e) => e.name).toList(),
+                        item: data.selectedHostel?.name,
                       );
                     }),
                   ],
@@ -107,7 +108,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                   return CustomButton(
                     isEnabled: authProvider.nameController.text.trim().isNotEmpty &&
                         authProvider.phoneController.text.trim().isNotEmpty &&
-                        authProvider.hostelId != null,
+                        authProvider.selectedHostel != null,
                     onTap: () async {
                       if (authProvider.phoneController.text.length != 10) {
                         SnackbarService.showSnackbar("Phone number should be of 10 digits");

@@ -4,4 +4,6 @@ class ApiEndpoints {
   static String signUpEndpoint = "$baseUrl/auth/register";
   static String loginEndpoint = "$baseUrl/auth/login";
   static String refreshAccesstoken = "$baseUrl/auth/get-access-token";
+
+  static String getHostelsEndpoint = "$baseUrl/hostel/";
 }
