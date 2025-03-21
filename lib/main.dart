@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hms_app/core/common/pages/connectivity_wrapper.dart';
 import 'package:hms_app/core/common/provider/network_provider.dart';
+import 'package:hms_app/core/common/provider/user_provider.dart';
+import 'package:hms_app/core/helper/snackbar.dart';
 import 'package:hms_app/core/navigation/go_router.dart';
 import 'package:hms_app/core/theme/app_theme.dart';
+import 'package:hms_app/features/auth/presentation/provider/auth_provider.dart';
+import 'package:hms_app/init_dependencies.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initDependencies();
   runApp(const MyApp());
 }
 
@@ -18,8 +24,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => NetworkProvider()),
+        ChangeNotifierProvider(create: (context) => serviceLocator<UserProvider>()),
+        ChangeNotifierProvider(create: (context) => serviceLocator<AuthProvider>()),
       ],
       child: MaterialApp.router(
+        scaffoldMessengerKey: SnackbarService.messengerKey,
         title: 'Hostel Monitoring System',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.themeMode,
