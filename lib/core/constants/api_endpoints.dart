@@ -6,4 +6,5 @@ class ApiEndpoints {
   static String refreshAccesstoken = "$baseUrl/auth/get-access-token";
 
   static String getHostelsEndpoint = "$baseUrl/hostel/";
+  static String getYourComplaints = "$baseUrl/complaints/";
 }
