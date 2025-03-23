@@ -6,6 +6,7 @@ class ComplaintModel {
   final String status;
   final String raisedBy;
   final String priority;
+  final List<String> images;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -17,6 +18,7 @@ class ComplaintModel {
     required this.status,
     required this.raisedBy,
     required this.priority,
+    required this.images,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -30,6 +32,7 @@ class ComplaintModel {
       status: json['status'],
       raisedBy: json['raised_by'],
       priority: json['priority'],
+      images: List<String>.from(json['images'] ?? []),
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );
@@ -44,6 +47,7 @@ class ComplaintModel {
       'status': status,
       'raised_by': raisedBy,
       'priority': priority,
+      'images': images,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
     };
