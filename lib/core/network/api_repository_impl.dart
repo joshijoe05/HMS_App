@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:hms_app/core/common/provider/user_provider.dart';
 import 'package:hms_app/core/error/exceptions.dart';
@@ -67,6 +68,45 @@ class ApiRepositoryImpl implements ApiRepository {
     }
   }
 
+  @override
+  Future<http.Response> multiPartPost(
+      {required String url,
+      Map<String, String>? fields,
+      required List<File> files,
+      bool isProtected = true,
+      required String fileKey}) async {
+    try {
+      final request = http.MultipartRequest('POST', Uri.parse(url));
+      final headers = await _getHeaders(isMultiPart: true, isProtected: isProtected);
+      request.headers.addAll(headers);
+
+      if (fields != null) {
+        fields.forEach((key, value) {
+          request.fields[key] = value;
+        });
+      }
+
+      for (var file in files) {
+        final fileStream = http.ByteStream(file.openRead());
+        final length = await file.length();
+        final multipartFile = http.MultipartFile(fileKey, fileStream, length, filename: file.path.split('/').last);
+        request.files.add(multipartFile);
+      }
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+      return _handleResponse(response);
+    } on ServerException catch (e) {
+      throw ServerException(e.message);
+    } on http.ClientException {
+      throw const ServerException("Internal Server Error, Please try again in sometime");
+    } on FormatException {
+      throw const ServerException("Bad response Format, Please try again");
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
   http.Response _handleResponse(http.Response response) {
     if (kDebugMode) {
       print(response.body);
@@ -79,10 +119,10 @@ class ApiRepositoryImpl implements ApiRepository {
     }
   }
 
-  Future<Map<String, String>> _getHeaders({bool isProtected = true}) async {
+  Future<Map<String, String>> _getHeaders({bool isProtected = true, bool isMultiPart = false}) async {
     Map<String, String> headers = {};
     String? accessToken = userProvider.accessToken;
-    headers["Content-Type"] = "application/json";
+    if (!isMultiPart) headers["Content-Type"] = "application/json";
     if (isProtected) {
       if (accessToken == null) {
         SnackbarService.showSnackbar("Session Expired. Please login again");
