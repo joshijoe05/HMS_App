@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       (value) => value[1] as bool,
     );
     if (goHome) {
-      router.go(Routes.home);
+      router.go(Routes.navScreen);
     } else {
       router.go(Routes.login);
     }

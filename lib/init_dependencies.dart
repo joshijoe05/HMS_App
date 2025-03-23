@@ -9,6 +9,7 @@ import 'package:hms_app/features/auth/domain/usecases/user_login.dart';
 import 'package:hms_app/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:hms_app/features/auth/presentation/provider/auth_provider.dart';
 import 'package:hms_app/features/auth/presentation/provider/hostel_provider.dart';
+import 'package:hms_app/features/home/provider/home_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final serviceLocator = GetIt.instance;
@@ -25,6 +26,9 @@ Future<void> initDependencies() async {
     () => ApiRepositoryImpl(serviceLocator()),
   );
   _initAuth();
+  serviceLocator.registerLazySingleton<HomeProvider>(
+    () => HomeProvider(serviceLocator()),
+  );
 }
 
 void _initAuth() {
