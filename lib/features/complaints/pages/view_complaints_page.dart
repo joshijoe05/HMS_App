@@ -4,6 +4,7 @@ import 'package:hms_app/core/helper/sized_box_ext.dart';
 import 'package:hms_app/core/theme/colors.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
+import 'package:hms_app/features/complaints/widgets/complaint_slidable_widget.dart';
 import 'package:provider/provider.dart';
 
 class ViewComplaintsPage extends StatefulWidget {
@@ -103,7 +104,7 @@ class _ViewComplaintsPageState extends State<ViewComplaintsPage> {
                     }
                     return Column(
                       children: [
-                        for (ComplaintModel cmp in data.complaints) Text(cmp.description),
+                        for (ComplaintModel cmp in data.complaints) ComplaintSlidableWidget(cmp: cmp),
                       ],
                     );
                   },
