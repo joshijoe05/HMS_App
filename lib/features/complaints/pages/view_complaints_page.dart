@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:hms_app/core/common/widgets/button.dart';
 import 'package:hms_app/core/helper/dimensions.dart';
 import 'package:hms_app/core/helper/sized_box_ext.dart';
 import 'package:hms_app/core/theme/colors.dart';
@@ -72,7 +74,14 @@ class _ViewComplaintsPageState extends State<ViewComplaintsPage> {
                     style: textTheme.bodySmall?.copyWith(fontSize: 15, color: AppColors.grey600),
                   ),
                 ),
-                40.height,
+                30.height,
+                CustomButton(
+                  onTap: () {},
+                  title: "Raise your Complaint",
+                  color: AppColors.primaryColor50,
+                  textColor: AppColors.primaryColor900,
+                ),
+                20.height,
                 Text(
                   "Your Complaints",
                   maxLines: 2,
@@ -82,7 +91,7 @@ class _ViewComplaintsPageState extends State<ViewComplaintsPage> {
                 20.height,
                 Consumer<ComplaintProvider>(
                   builder: (context, data, child) {
-                    if (data.complaints.isEmpty) {
+                    if (data.complaints.isEmpty && !EasyLoading.isShow) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hms_app/core/constants/assets.dart';
+import 'package:hms_app/core/navigation/go_router.dart';
+import 'package:hms_app/core/navigation/routes.dart';
 import 'package:hms_app/core/theme/colors.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 
@@ -30,7 +32,9 @@ class ComplaintSlidableWidget extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          onTap: () {},
+          onTap: () {
+            router.push(Routes.complaintDetail, extra: cmp);
+          },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(color: AppColors.grey500, width: 0.5),

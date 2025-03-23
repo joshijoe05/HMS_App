@@ -6,4 +6,5 @@ class Routes {
   static const String mailSent = '/verify-mail';
   static const String navScreen = '/nav-screen';
   static const String home = '/home';
+  static const String complaintDetail = '/complaint-detail';
 }

@@ -6,6 +6,8 @@ import 'package:hms_app/features/auth/presentation/pages/mail_sent_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/profile_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/splash_screen.dart';
+import 'package:hms_app/features/complaints/models/complaint_model.dart';
+import 'package:hms_app/features/complaints/pages/complaint_detail_page.dart';
 import 'package:hms_app/features/home/pages/navbar_screen.dart';
 
 final GoRouter router = GoRouter(
@@ -42,5 +44,11 @@ final GoRouter router = GoRouter(
       path: Routes.navScreen,
       builder: (context, state) => const TabScreen(),
     ),
+    GoRoute(
+        path: Routes.complaintDetail,
+        builder: (context, state) {
+          final ComplaintModel complaintModel = state.extra as ComplaintModel;
+          return ComplaintDetailPage(complaintModel: complaintModel);
+        }),
   ],
 );
