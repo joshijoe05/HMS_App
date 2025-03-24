@@ -35,7 +35,7 @@ Future<void> initDependencies() async {
     () => ComplaintProvider(serviceLocator()),
   );
   serviceLocator.registerLazySingleton<RaiseComplaintProvider>(
-    () => RaiseComplaintProvider(serviceLocator()),
+    () => RaiseComplaintProvider(serviceLocator(), serviceLocator()),
   );
 }
 

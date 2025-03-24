@@ -9,6 +9,7 @@ import 'package:hms_app/core/theme/colors.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
 import 'package:hms_app/features/complaints/widgets/complaint_slidable_widget.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 
 class ViewComplaintsPage extends StatefulWidget {
@@ -49,80 +50,91 @@ class _ViewComplaintsPageState extends State<ViewComplaintsPage> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          child: Padding(
-            padding: const EdgeInsets.all(15).copyWith(bottom: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: Dimensions.getWidth(context) * 0.75,
-                  child: Text(
-                    "Complaints & Issues",
+      body: LiquidPullToRefresh(
+        onRefresh: () async {
+          complaintProvider.clear();
+          await complaintProvider.getYourComplaints();
+        },
+        animSpeedFactor: 5,
+        showChildOpacityTransition: false,
+        color: AppColors.successColor500,
+        backgroundColor: AppColors.successColor100,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            controller: _scrollController,
+            child: Padding(
+              padding: const EdgeInsets.all(15).copyWith(bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: Dimensions.getWidth(context) * 0.75,
+                    child: Text(
+                      "Complaints & Issues",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.headlineMedium,
+                    ),
+                  ),
+                  10.height,
+                  SizedBox(
+                    width: Dimensions.getWidth(context) * 0.9,
+                    child: Text(
+                      "Raise your hostel concerns, and let the authorities resolve them swiftly! 🚀",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.bodySmall?.copyWith(fontSize: 15, color: AppColors.grey600),
+                    ),
+                  ),
+                  30.height,
+                  CustomButton(
+                    onTap: () {
+                      router.push(Routes.raiseComplaint);
+                    },
+                    title: "Raise your Complaint",
+                    color: AppColors.primaryColor50,
+                    textColor: AppColors.primaryColor900,
+                  ),
+                  20.height,
+                  Text(
+                    "Your Complaints",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: textTheme.headlineMedium,
+                    style: textTheme.bodyLarge,
                   ),
-                ),
-                10.height,
-                SizedBox(
-                  width: Dimensions.getWidth(context) * 0.9,
-                  child: Text(
-                    "Raise your hostel concerns, and let the authorities resolve them swiftly! 🚀",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: textTheme.bodySmall?.copyWith(fontSize: 15, color: AppColors.grey600),
-                  ),
-                ),
-                30.height,
-                CustomButton(
-                  onTap: () {
-                    router.push(Routes.raiseComplaint);
-                  },
-                  title: "Raise your Complaint",
-                  color: AppColors.primaryColor50,
-                  textColor: AppColors.primaryColor900,
-                ),
-                20.height,
-                Text(
-                  "Your Complaints",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: textTheme.bodyLarge,
-                ),
-                20.height,
-                Consumer<ComplaintProvider>(
-                  builder: (context, data, child) {
-                    if (data.complaints.isEmpty && !EasyLoading.isShow) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          (Dimensions.getHeight(context) * 0.25).round().height,
-                          Center(
-                            child: SizedBox(
-                              width: (Dimensions.getWidth(context) * 0.8),
-                              child: Text(
-                                "You have not raised any complaints yet !",
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                                style: textTheme.bodyLarge,
+                  20.height,
+                  Consumer<ComplaintProvider>(
+                    builder: (context, data, child) {
+                      if (data.complaints.isEmpty && !EasyLoading.isShow) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            (Dimensions.getHeight(context) * 0.25).round().height,
+                            Center(
+                              child: SizedBox(
+                                width: (Dimensions.getWidth(context) * 0.8),
+                                child: Text(
+                                  "You have not raised any complaints yet !",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                  style: textTheme.bodyLarge,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
+                        );
+                      }
+                      return Column(
+                        children: [
+                          for (ComplaintModel cmp in data.complaints) ComplaintSlidableWidget(cmp: cmp),
                         ],
                       );
-                    }
-                    return Column(
-                      children: [
-                        for (ComplaintModel cmp in data.complaints) ComplaintSlidableWidget(cmp: cmp),
-                      ],
-                    );
-                  },
-                ),
-              ],
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

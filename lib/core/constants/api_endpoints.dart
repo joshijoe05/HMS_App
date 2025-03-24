@@ -7,4 +7,5 @@ class ApiEndpoints {
 
   static String getHostelsEndpoint = "$baseUrl/hostel/";
   static String getYourComplaints = "$baseUrl/complaints/";
+  static String raiseComplaint = "$baseUrl/complaints/create";
 }

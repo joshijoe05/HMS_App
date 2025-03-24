@@ -17,12 +17,19 @@ class ComplaintProvider extends ChangeNotifier {
   bool isLoading = false;
   List<ComplaintModel> complaints = [];
 
+  void clear() {
+    complaintsPage = 1;
+    hasMoreComplaints = true;
+    complaints = [];
+    notifyListeners();
+  }
+
   Future<void> getYourComplaints() async {
     try {
       if (isLoading && !hasMoreComplaints) return;
       EasyLoading.show();
       isLoading = true;
-      final res = await apiRepository.get(url: ApiEndpoints.getYourComplaints);
+      final res = await apiRepository.get(url: "${ApiEndpoints.getYourComplaints}?page=$complaintsPage");
       final body = jsonDecode(res.body);
       if (res.statusCode == 200) {
         if (body['data'].isEmpty) {

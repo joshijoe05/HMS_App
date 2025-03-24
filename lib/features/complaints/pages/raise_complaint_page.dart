@@ -224,7 +224,9 @@ class _RaiseComplaintPageState extends State<RaiseComplaintPage> {
                   ),
                   30.height,
                   CustomButton(
-                    onTap: () {},
+                    onTap: () async {
+                      await data.raiseComplaint();
+                    },
                     title: "Raise Complaint",
                     isEnabled:
                         data.type != null && data.priority != null && data.descriptionController.text.trim().isNotEmpty,
