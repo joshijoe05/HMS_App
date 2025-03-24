@@ -10,6 +10,7 @@ import 'package:hms_app/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:hms_app/features/auth/presentation/provider/auth_provider.dart';
 import 'package:hms_app/features/auth/presentation/provider/hostel_provider.dart';
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
+import 'package:hms_app/features/complaints/provider/raise_complaint_provider.dart';
 import 'package:hms_app/features/home/provider/home_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +33,9 @@ Future<void> initDependencies() async {
   );
   serviceLocator.registerLazySingleton<ComplaintProvider>(
     () => ComplaintProvider(serviceLocator()),
+  );
+  serviceLocator.registerLazySingleton<RaiseComplaintProvider>(
+    () => RaiseComplaintProvider(serviceLocator()),
   );
 }
 

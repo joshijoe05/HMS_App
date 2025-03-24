@@ -3,6 +3,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hms_app/core/common/widgets/button.dart';
 import 'package:hms_app/core/helper/dimensions.dart';
 import 'package:hms_app/core/helper/sized_box_ext.dart';
+import 'package:hms_app/core/navigation/go_router.dart';
+import 'package:hms_app/core/navigation/routes.dart';
 import 'package:hms_app/core/theme/colors.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
@@ -76,7 +78,9 @@ class _ViewComplaintsPageState extends State<ViewComplaintsPage> {
                 ),
                 30.height,
                 CustomButton(
-                  onTap: () {},
+                  onTap: () {
+                    router.push(Routes.raiseComplaint);
+                  },
                   title: "Raise your Complaint",
                   color: AppColors.primaryColor50,
                   textColor: AppColors.primaryColor900,

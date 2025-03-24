@@ -1,6 +1,6 @@
 class ComplaintModel {
   final String id;
-  final String hostelId;
+  final String hostel;
   final String type;
   final String description;
   final String status;
@@ -9,10 +9,11 @@ class ComplaintModel {
   final List<String> images;
   final DateTime createdAt;
   final DateTime updatedAt;
+  // need to add comments
 
   ComplaintModel({
     required this.id,
-    required this.hostelId,
+    required this.hostel,
     required this.type,
     required this.description,
     required this.status,
@@ -26,7 +27,7 @@ class ComplaintModel {
   factory ComplaintModel.fromJson(Map<String, dynamic> json) {
     return ComplaintModel(
       id: json['_id'],
-      hostelId: json['hostel_id'],
+      hostel: json['hostel'],
       type: json['type'],
       description: json['description'],
       status: json['status'],
@@ -41,7 +42,7 @@ class ComplaintModel {
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
-      'hostel_id': hostelId,
+      'hostel': hostel,
       'type': type,
       'description': description,
       'status': status,

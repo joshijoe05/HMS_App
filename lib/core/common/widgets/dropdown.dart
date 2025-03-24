@@ -8,13 +8,15 @@ class CustomDropDownButton extends StatefulWidget {
   final String? item;
   final bool showHeading;
   final String heading;
+  final String placeHolder;
   const CustomDropDownButton(
       {super.key,
       required this.onChanged,
       required this.items,
       this.item,
-      this.showHeading = false,
-      this.heading = ""});
+      this.showHeading = true,
+      this.heading = "",
+      required this.placeHolder});
 
   @override
   State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
@@ -43,6 +45,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
+              hint: Text(widget.placeHolder, style: textTheme.bodyMedium),
               isExpanded: true,
               value: widget.item,
               items: widget.items.map((e) => buildMenuItem(e)).toList(),

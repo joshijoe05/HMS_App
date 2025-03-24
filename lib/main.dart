@@ -9,6 +9,7 @@ import 'package:hms_app/core/theme/app_theme.dart';
 import 'package:hms_app/features/auth/presentation/provider/auth_provider.dart';
 import 'package:hms_app/features/auth/presentation/provider/hostel_provider.dart';
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
+import 'package:hms_app/features/complaints/provider/raise_complaint_provider.dart';
 import 'package:hms_app/features/home/provider/home_provider.dart';
 import 'package:hms_app/init_dependencies.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => serviceLocator<AuthProvider>()),
         ChangeNotifierProvider(create: (context) => serviceLocator<HomeProvider>()),
         ChangeNotifierProvider(create: (context) => serviceLocator<ComplaintProvider>()),
+        ChangeNotifierProvider(create: (context) => serviceLocator<RaiseComplaintProvider>()),
       ],
       child: MaterialApp.router(
         scaffoldMessengerKey: SnackbarService.messengerKey,

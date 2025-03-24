@@ -8,6 +8,7 @@ import 'package:hms_app/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/splash_screen.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/pages/complaint_detail_page.dart';
+import 'package:hms_app/features/complaints/pages/raise_complaint_page.dart';
 import 'package:hms_app/features/home/pages/navbar_screen.dart';
 
 final GoRouter router = GoRouter(
@@ -50,5 +51,9 @@ final GoRouter router = GoRouter(
           final ComplaintModel complaintModel = state.extra as ComplaintModel;
           return ComplaintDetailPage(complaintModel: complaintModel);
         }),
+    GoRoute(
+      path: Routes.raiseComplaint,
+      builder: (context, state) => const RaiseComplaintPage(),
+    ),
   ],
 );

@@ -96,6 +96,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                       return CustomDropDownButton(
                         showHeading: true,
                         heading: "Hostel",
+                        placeHolder: "Select hostel",
                         onChanged: data.onHostelChanged,
                         items: data.hostelProvider.hostels.map((e) => e.name).toList(),
                         item: data.selectedHostel?.name,
