@@ -6,6 +6,7 @@ import 'package:hms_app/core/constants/api_endpoints.dart';
 import 'package:hms_app/core/error/exceptions.dart';
 import 'package:hms_app/core/helper/snackbar.dart';
 import 'package:hms_app/core/network/api_repository.dart';
+import 'package:hms_app/features/complaints/models/complaint_detail_model.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 
 class ComplaintProvider extends ChangeNotifier {
@@ -51,6 +52,28 @@ class ComplaintProvider extends ChangeNotifier {
     } finally {
       isLoading = false;
       EasyLoading.dismiss();
+    }
+  }
+
+  ComplaintDetailModel? complaintDetail;
+  bool isFetchingComplaintDetail = false;
+  Future<void> getComplaintDetails({required String id}) async {
+    try {
+      isFetchingComplaintDetail = true;
+      EasyLoading.show();
+      final response = await apiRepository.get(url: ApiEndpoints.getComplaintDetails + id);
+      final body = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        complaintDetail = ComplaintDetailModel.fromJson(body['data']);
+      }
+    } on ServerException catch (e) {
+      SnackbarService.showSnackbar(e.message);
+    } catch (e) {
+      SnackbarService.showSnackbar(e.toString());
+    } finally {
+      isFetchingComplaintDetail = false;
+      EasyLoading.dismiss();
+      notifyListeners();
     }
   }
 }

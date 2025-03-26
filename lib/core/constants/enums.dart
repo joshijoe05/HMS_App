@@ -1,0 +1,1 @@
+enum MessageUsers { student, admin }
