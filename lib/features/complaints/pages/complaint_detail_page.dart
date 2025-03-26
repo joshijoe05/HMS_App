@@ -22,6 +22,7 @@ class ComplaintDetailPage extends StatefulWidget {
 
 class _ComplaintDetailPageState extends State<ComplaintDetailPage> {
   late ComplaintProvider complaintProvider;
+  final TextEditingController commentController = TextEditingController();
 
   @override
   void initState() {
@@ -191,13 +192,22 @@ class _ComplaintDetailPageState extends State<ComplaintDetailPage> {
                             CustomTextField(
                               heading: "",
                               showHeading: false,
-                              textEditingController: TextEditingController(),
+                              textEditingController: commentController,
                               hintText: "Comment here",
                               isMultiline: true,
-                              suffix: Icon(
-                                Icons.send_rounded,
-                                size: 26,
-                                color: AppColors.primaryColor900,
+                              suffix: IconButton(
+                                onPressed: () async {
+                                  if (commentController.text.trim().isNotEmpty) {
+                                    bool isDone = await data.addCommentToComplaint(
+                                        id: data.complaintDetail!.id, comment: commentController.text.trim());
+                                    if (isDone) commentController.clear();
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.send_rounded,
+                                  size: 26,
+                                  color: AppColors.primaryColor900,
+                                ),
                               ),
                             ),
                           ],

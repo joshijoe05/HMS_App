@@ -76,4 +76,27 @@ class ComplaintProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<bool> addCommentToComplaint({required String id, required String comment}) async {
+    try {
+      EasyLoading.show();
+      final response = await apiRepository.post(url: ApiEndpoints.addComment + id, body: {"message": comment});
+      final body = jsonDecode(response.body);
+      if (response.statusCode == 201) {
+        body["data"]["added_by"] = complaintDetail?.raisedBy;
+        complaintDetail?.comments.add(CommentModel.fromJson(body['data']));
+        return true;
+      }
+      return false;
+    } on ServerException catch (e) {
+      SnackbarService.showSnackbar(e.message);
+      return false;
+    } catch (e) {
+      SnackbarService.showSnackbar(e.toString());
+      return false;
+    } finally {
+      EasyLoading.dismiss();
+      notifyListeners();
+    }
+  }
 }

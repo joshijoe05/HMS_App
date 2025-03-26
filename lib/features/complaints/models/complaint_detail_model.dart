@@ -74,7 +74,7 @@ class CommentModel {
   factory CommentModel.fromJson(Map<String, dynamic> json) {
     return CommentModel(
       id: json['_id'],
-      text: json['text'],
+      text: json['comment'],
       createdAt: DateTime.parse(json['createdAt']),
       addedBy: json['added_by'],
     );

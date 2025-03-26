@@ -9,4 +9,5 @@ class ApiEndpoints {
   static String getYourComplaints = "$baseUrl/complaints/";
   static String raiseComplaint = "$baseUrl/complaints/create";
   static String getComplaintDetails = "$baseUrl/complaints/";
+  static String addComment = "$baseUrl/complaints/comment/";
 }
