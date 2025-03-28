@@ -29,20 +29,6 @@ class _TabScreenState extends State<TabScreen> {
         tabs: const [
           GButton(
             padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-            icon: Icons.home_filled,
-            iconColor: AppColors.primaryColor400,
-            iconActiveColor: AppColors.primaryColor900,
-            text: "Home",
-          ),
-          // GButton(
-          //   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-          //   icon: AppIcons.ask_ai,
-          //   iconColor: AppColors.primaryColor400,
-          //   iconActiveColor: AppColors.primaryColor900,
-          //   text: "Ask AI",
-          // ),
-          GButton(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
             icon: Icons.warning_amber_rounded,
             iconColor: AppColors.warningColor500,
             iconActiveColor: Colors.amber,
@@ -53,7 +39,14 @@ class _TabScreenState extends State<TabScreen> {
             icon: Icons.directions_bus,
             iconColor: AppColors.successColor500,
             iconActiveColor: AppColors.successColor700,
-            text: "Transport",
+            text: "Buses",
+          ),
+          GButton(
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+            icon: Icons.person_2_rounded,
+            iconColor: AppColors.primaryColor400,
+            iconActiveColor: AppColors.primaryColor900,
+            text: "Profile",
           ),
         ],
       ),

@@ -8,7 +8,7 @@ class HomeProvider extends ChangeNotifier {
   HomeProvider(this.userProvider);
   int selectedIndex = 0;
   List<Widget> screens = const [
-    // HomeScreen(),
+    ViewComplaintsPage(),
     Scaffold(
         body: Padding(
       padding: EdgeInsets.all(15.0),
@@ -23,7 +23,6 @@ class HomeProvider extends ChangeNotifier {
         ),
       )),
     )),
-    ViewComplaintsPage(),
     Scaffold(
         body: Padding(
       padding: EdgeInsets.all(15.0),
