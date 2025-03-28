@@ -31,6 +31,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final response =
           await apiRepository.post(url: ApiEndpoints.loginEndpoint, body: params.toMap(), isProtected: false);
+      if (jsonDecode(response.body)["user"]["role"] != "student") {
+        throw ServerException("Invalid credentials");
+      }
       return jsonDecode(response.body);
     } on ServerException catch (e) {
       throw ServerException(e.message);
