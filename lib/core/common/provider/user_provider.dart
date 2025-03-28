@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hms_app/core/constants/api_endpoints.dart';
 import 'package:hms_app/core/helper/jwt_helper.dart';
+import 'package:hms_app/core/navigation/go_router.dart';
+import 'package:hms_app/core/navigation/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,6 +25,15 @@ class UserProvider extends ChangeNotifier {
     _accessToken = prefs.getString("accessToken");
     _refreshToken = prefs.getString("refreshToken");
     notifyListeners();
+  }
+
+  Future<void> logout() async {
+    EasyLoading.show();
+    await Future.delayed(Duration(seconds: 1));
+    await prefs.remove("accessToken");
+    await prefs.remove("refreshToken");
+    EasyLoading.dismiss();
+    router.go(Routes.login);
   }
 
   Future<bool> refreshAccessToken() async {

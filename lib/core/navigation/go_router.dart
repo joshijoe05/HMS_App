@@ -10,6 +10,7 @@ import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/pages/complaint_detail_page.dart';
 import 'package:hms_app/features/complaints/pages/raise_complaint_page.dart';
 import 'package:hms_app/features/home/pages/navbar_screen.dart';
+import 'package:hms_app/features/profile/pages/profile_page.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/',
@@ -54,6 +55,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.raiseComplaint,
       builder: (context, state) => const RaiseComplaintPage(),
+    ),
+    GoRoute(
+      path: Routes.profile,
+      builder: (context, state) => const ProfilePage(),
     ),
   ],
 );

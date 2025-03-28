@@ -12,6 +12,7 @@ import 'package:hms_app/features/auth/presentation/provider/hostel_provider.dart
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
 import 'package:hms_app/features/complaints/provider/raise_complaint_provider.dart';
 import 'package:hms_app/features/home/provider/home_provider.dart';
+import 'package:hms_app/features/profile/provider/profile_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final serviceLocator = GetIt.instance;
@@ -36,6 +37,9 @@ Future<void> initDependencies() async {
   );
   serviceLocator.registerLazySingleton<RaiseComplaintProvider>(
     () => RaiseComplaintProvider(serviceLocator(), serviceLocator()),
+  );
+  serviceLocator.registerLazySingleton<ProfileProvider>(
+    () => ProfileProvider(serviceLocator()),
   );
 }
 
