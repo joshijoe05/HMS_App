@@ -15,7 +15,7 @@ class HomeProvider extends ChangeNotifier {
       padding: EdgeInsets.all(15.0),
       child: Center(
           child: Text(
-        "We are building something great for the next update 🎉 ! Catch you soon 🙌🏻",
+        "Bus Booking Application...",
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 22.0,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hms_app/core/common/widgets/back_button.dart';
 import 'package:hms_app/core/common/widgets/chat_widgets.dart';
@@ -11,6 +12,7 @@ import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ComplaintDetailPage extends StatefulWidget {
   final ComplaintModel complaintModel;
@@ -149,12 +151,25 @@ class _ComplaintDetailPageState extends State<ComplaintDetailPage> {
                                             children: [
                                               for (int i = 0; i < data.complaintDetail!.images.length; i++)
                                                 ClipRRect(
-                                                  borderRadius: BorderRadius.circular(12),
-                                                  child: Image.network(
-                                                    data.complaintDetail!.images[i],
-                                                    fit: BoxFit.cover,
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  child: CachedNetworkImage(
                                                     width: (Dimensions.getWidth(context) - 40) * 0.5,
                                                     height: Dimensions.getHeight(context) * 0.2,
+                                                    alignment: Alignment.center,
+                                                    placeholder: (context, url) => Shimmer.fromColors(
+                                                      baseColor: Colors.grey[350]!,
+                                                      highlightColor: Colors.grey[200]!,
+                                                      child: Container(
+                                                        width: double.maxFinite,
+                                                        height: double.maxFinite,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    errorWidget: (context, url, error) => const Center(
+                                                      child: Icon(Icons.error, color: AppColors.errorColor500),
+                                                    ),
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: data.complaintDetail!.images[i],
                                                   ),
                                                 ),
                                             ],
