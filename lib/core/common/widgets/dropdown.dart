@@ -9,6 +9,7 @@ class CustomDropDownButton extends StatefulWidget {
   final bool showHeading;
   final String heading;
   final String placeHolder;
+  final Color? borderColor;
   const CustomDropDownButton(
       {super.key,
       required this.onChanged,
@@ -16,7 +17,8 @@ class CustomDropDownButton extends StatefulWidget {
       this.item,
       this.showHeading = true,
       this.heading = "",
-      required this.placeHolder});
+      required this.placeHolder,
+      this.borderColor});
 
   @override
   State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
@@ -40,7 +42,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: AppColors.greyScaleColor,
+              color: widget.borderColor ?? AppColors.greyScaleColor,
             ),
           ),
           child: DropdownButtonHideUnderline(

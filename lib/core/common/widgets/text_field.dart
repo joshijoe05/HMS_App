@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
   final bool showHeading;
   final bool isMultiline;
   final double? leftPadding;
+  final Color? borderColor;
   const CustomTextField({
     super.key,
     required this.heading,
@@ -33,6 +34,7 @@ class CustomTextField extends StatelessWidget {
     this.prefix,
     this.isMultiline = false,
     this.leftPadding,
+    this.borderColor,
   });
 
   @override
@@ -75,6 +77,15 @@ class CustomTextField extends StatelessWidget {
             counter: 0.width,
             contentPadding: const EdgeInsets.symmetric(vertical: 18).copyWith(left: leftPadding ?? 20, right: 45),
             hintStyle: textTheme.bodyMedium?.copyWith(color: AppColors.grey500),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(color: borderColor ?? AppColors.greyScaleColor)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(color: borderColor ?? AppColors.greyScaleColor)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(color: borderColor ?? AppColors.greyScaleColor)),
           ),
         ),
       ],
