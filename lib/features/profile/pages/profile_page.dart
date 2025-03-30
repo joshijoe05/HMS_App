@@ -90,6 +90,17 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
+                        20.height,
+                        Row(
+                          children: [
+                            Text("Hostel : ", style: textTheme.headlineMedium),
+                            20.width,
+                            Text(
+                              data.user!.hostel,
+                              style: textTheme.headlineMedium,
+                            ),
+                          ],
+                        ),
                         40.height,
                         CustomButton(
                           onTap: () {

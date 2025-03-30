@@ -7,6 +7,7 @@ class UserModel {
     required this.contactNumber,
     required this.createdAt,
     required this.updatedAt,
+    required this.hostel,
   });
   final String id;
   final String email;
@@ -15,6 +16,7 @@ class UserModel {
   final String contactNumber;
   final String createdAt;
   final String updatedAt;
+  final String hostel;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -25,6 +27,7 @@ class UserModel {
       'contactNumber': contactNumber,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+      'hostel': hostel,
     };
   }
 
@@ -37,6 +40,7 @@ class UserModel {
       contactNumber: map['contactNumber'] as String,
       createdAt: map['createdAt'] as String,
       updatedAt: map['updatedAt'] as String,
+      hostel: map['hostelId']['name'] as String,
     );
   }
 }
