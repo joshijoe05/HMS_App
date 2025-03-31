@@ -14,4 +14,5 @@ class ApiEndpoints {
 
   // bus
   static String getCities = "$baseUrl/bus/cities";
+  static String fetchBuses = "$baseUrl/bus/students";
 }

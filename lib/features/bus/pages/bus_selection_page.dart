@@ -4,6 +4,8 @@ import 'package:hms_app/core/common/widgets/dropdown.dart';
 import 'package:hms_app/core/common/widgets/text_field.dart';
 import 'package:hms_app/core/helper/dimensions.dart';
 import 'package:hms_app/core/helper/sized_box_ext.dart';
+import 'package:hms_app/core/navigation/go_router.dart';
+import 'package:hms_app/core/navigation/routes.dart';
 import 'package:hms_app/core/theme/colors.dart';
 import 'package:hms_app/features/bus/provider/bus_provider.dart';
 import 'package:provider/provider.dart';
@@ -66,17 +68,20 @@ class _BusSelectionPageState extends State<BusSelectionPage> {
                           item: data.selectedCity,
                           borderColor: AppColors.errorColor500,
                         ),
+                        30.height,
+                        CustomButton(
+                          onTap: () {
+                            router.push(Routes.busRoutes);
+                          },
+                          borderColor: AppColors.errorColor500,
+                          isEnabled: data.selectedCity != null,
+                          color: AppColors.errorColor500,
+                          title: "Search Buses",
+                          textColor: Colors.white,
+                        ),
                       ],
                     );
                   },
-                ),
-                30.height,
-                CustomButton(
-                  onTap: () {},
-                  borderColor: AppColors.errorColor500,
-                  color: AppColors.errorColor500,
-                  title: "Search Buses",
-                  textColor: Colors.white,
                 ),
               ],
             ),

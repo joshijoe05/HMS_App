@@ -9,4 +9,7 @@ class Routes {
   static const String complaintDetail = '/complaint-detail';
   static const String raiseComplaint = '/raise-complaint';
   static const String profile = '/profile';
+
+  // bus
+  static const String busRoutes = '/bus-routes';
 }

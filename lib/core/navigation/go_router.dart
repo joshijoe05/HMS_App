@@ -6,6 +6,7 @@ import 'package:hms_app/features/auth/presentation/pages/mail_sent_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/profile_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/splash_screen.dart';
+import 'package:hms_app/features/bus/pages/bus_routes_page.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/pages/complaint_detail_page.dart';
 import 'package:hms_app/features/complaints/pages/raise_complaint_page.dart';
@@ -59,6 +60,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.profile,
       builder: (context, state) => const ProfilePage(),
+    ),
+    GoRoute(
+      path: Routes.busRoutes,
+      builder: (context, state) => const BusRoutesPage(),
     ),
   ],
 );
