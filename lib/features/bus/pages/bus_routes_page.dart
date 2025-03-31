@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hms_app/core/common/widgets/back_button.dart';
 import 'package:hms_app/core/common/widgets/button.dart';
+import 'package:hms_app/core/helper/date_time.dart';
 import 'package:hms_app/core/helper/dimensions.dart';
 import 'package:hms_app/core/helper/sized_box_ext.dart';
+import 'package:hms_app/core/navigation/go_router.dart';
+import 'package:hms_app/core/navigation/routes.dart';
 import 'package:hms_app/core/theme/colors.dart';
 import 'package:hms_app/features/bus/models/bus_route_model.dart';
 import 'package:hms_app/features/bus/provider/bus_provider.dart';
@@ -91,9 +94,22 @@ class BusRouteWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            bus.name,
-            style: textTheme.bodyMedium,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  bus.name,
+                  style: textTheme.bodyMedium,
+                ),
+              ),
+              10.width,
+              Text(
+                DateTimeHelper.formatDateTime(
+                  bus.date.toIso8601String(),
+                ),
+              ),
+            ],
           ),
           10.height,
           Row(
@@ -131,7 +147,9 @@ class BusRouteWidget extends StatelessWidget {
               ),
               10.width,
               CustomButton(
-                onTap: () {},
+                onTap: () {
+                  router.push(Routes.passengerInfo, extra: bus);
+                },
                 title: "Book Now",
                 color: AppColors.errorColor500,
                 width: 100,

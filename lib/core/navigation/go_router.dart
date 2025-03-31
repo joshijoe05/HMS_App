@@ -6,7 +6,9 @@ import 'package:hms_app/features/auth/presentation/pages/mail_sent_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/profile_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:hms_app/features/auth/presentation/pages/splash_screen.dart';
+import 'package:hms_app/features/bus/models/bus_route_model.dart';
 import 'package:hms_app/features/bus/pages/bus_routes_page.dart';
+import 'package:hms_app/features/bus/pages/passenger_information_page.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/pages/complaint_detail_page.dart';
 import 'package:hms_app/features/complaints/pages/raise_complaint_page.dart';
@@ -64,6 +66,13 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.busRoutes,
       builder: (context, state) => const BusRoutesPage(),
+    ),
+    GoRoute(
+      path: Routes.passengerInfo,
+      builder: (context, state) {
+        final BusRouteModel bus = state.extra as BusRouteModel;
+        return PassengerInformationPage(bus: bus);
+      },
     ),
   ],
 );

@@ -12,4 +12,5 @@ class Routes {
 
   // bus
   static const String busRoutes = '/bus-routes';
+  static const String passengerInfo = '/passenger-info';
 }
