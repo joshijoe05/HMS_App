@@ -115,6 +115,8 @@ class AuthProvider extends ChangeNotifier {
         SnackbarService.showSnackbar("Login Successful");
         prefs.setString("accessToken", r['data']['accessToken']);
         prefs.setString("refreshToken", r['data']['refreshToken']);
+        prefs.setString("name", r['data']['user']['fullName']);
+        prefs.setString("email", r['data']['user']['email']);
         userProvider.loadTokens();
         clearLoginData();
         router.go(Routes.navScreen);

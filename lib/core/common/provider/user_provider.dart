@@ -13,6 +13,7 @@ class UserProvider extends ChangeNotifier {
   String? _refreshToken;
   SharedPreferences prefs;
   String? userName;
+  String? email;
 
   UserProvider(this.prefs) {
     loadTokens();
@@ -24,6 +25,8 @@ class UserProvider extends ChangeNotifier {
   void loadTokens() {
     _accessToken = prefs.getString("accessToken");
     _refreshToken = prefs.getString("refreshToken");
+    userName = prefs.getString("name");
+    email = prefs.getString("email");
     notifyListeners();
   }
 
@@ -32,6 +35,7 @@ class UserProvider extends ChangeNotifier {
     await Future.delayed(Duration(seconds: 1));
     await prefs.remove("accessToken");
     await prefs.remove("refreshToken");
+    await prefs.clear();
     EasyLoading.dismiss();
     router.go(Routes.login);
   }
