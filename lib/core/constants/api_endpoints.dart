@@ -15,4 +15,8 @@ class ApiEndpoints {
   // bus
   static String getCities = "$baseUrl/bus/cities";
   static String fetchBuses = "$baseUrl/bus/students";
+
+  // payment
+  static String initiatePayment = "$baseUrl/payment/initiate-payment";
+  static String validatePayment = "$baseUrl/payment/validate";
 }

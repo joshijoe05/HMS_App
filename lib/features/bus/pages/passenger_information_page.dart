@@ -9,6 +9,8 @@ import 'package:hms_app/core/helper/dimensions.dart';
 import 'package:hms_app/core/helper/sized_box_ext.dart';
 import 'package:hms_app/core/theme/colors.dart';
 import 'package:hms_app/features/bus/models/bus_route_model.dart';
+import 'package:hms_app/features/bus/models/initiate_payment_params.dart';
+import 'package:hms_app/features/bus/provider/booking_provider.dart';
 import 'package:provider/provider.dart';
 
 class PassengerInformationPage extends StatefulWidget {
@@ -160,8 +162,15 @@ class _PassengerInformationPageState extends State<PassengerInformationPage> {
                   ),
                   activeThumbColor: Colors.red,
                   activeTrackColor: Colors.red.withOpacity(0.2),
-                  onSwipeEnd: () {
+                  onSwipeEnd: () async {
                     HapticFeedback.vibrate();
+                    await context.read<BookingProvider>().initiatePayment(
+                            params: InitiatePaymentParams(
+                          busId: widget.bus.id,
+                          passengerName: nameController.text,
+                          passengerEmail: emailController.text,
+                          passengerPhone: phoneController.text,
+                        ));
                   },
                   child: Text("Pay ₹ ${widget.bus.busFare}", style: textTheme.bodyMedium?.copyWith(fontSize: 18)),
                 ),
