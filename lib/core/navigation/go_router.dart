@@ -9,6 +9,7 @@ import 'package:hms_app/features/auth/presentation/pages/splash_screen.dart';
 import 'package:hms_app/features/bus/models/bus_route_model.dart';
 import 'package:hms_app/features/bus/pages/bus_routes_page.dart';
 import 'package:hms_app/features/bus/pages/passenger_information_page.dart';
+import 'package:hms_app/features/bus/pages/payment_validation_page.dart';
 import 'package:hms_app/features/complaints/models/complaint_model.dart';
 import 'package:hms_app/features/complaints/pages/complaint_detail_page.dart';
 import 'package:hms_app/features/complaints/pages/raise_complaint_page.dart';
@@ -74,5 +75,26 @@ final GoRouter router = GoRouter(
         return PassengerInformationPage(bus: bus);
       },
     ),
+    GoRoute(
+      path: "${Routes.paymentValidation}/:id/:lock",
+      name: Routes.paymentValidation,
+      builder: (context, state) {
+        String id = state.pathParameters["id"] as String;
+        String lock = state.pathParameters["lock"] as String;
+        return PaymentValidationPage(
+          transactionId: id,
+          lock: lock,
+        );
+      },
+    ),
   ],
+  redirect: (context, state) {
+    final uri = state.uri;
+    if (uri.scheme == "hmsapp") {
+      if (uri.path.startsWith('/payment-success')) {
+        return "${Routes.paymentValidation}/${uri.pathSegments[1]}/${uri.pathSegments[2]}";
+      }
+    }
+    return null;
+  },
 );

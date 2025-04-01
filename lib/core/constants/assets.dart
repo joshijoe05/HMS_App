@@ -6,4 +6,6 @@ class Assets {
   static const electricity = "$coreDir/electricity.png";
   static const cleaning = "$coreDir/cleaning.png";
   static const others = "$coreDir/others.jpg";
+  static const paymentSuccess = "$coreDir/payment-success.json";
+  static const paymentFailure = "$coreDir/payment-failure.json";
 }
