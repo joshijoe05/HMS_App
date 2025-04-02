@@ -19,4 +19,7 @@ class ApiEndpoints {
   // payment
   static String initiatePayment = "$baseUrl/payment/initiate-payment";
   static String validatePayment = "$baseUrl/payment/validate";
+
+  // notifications
+  static String getNotifications = "$baseUrl/notifications/";
 }

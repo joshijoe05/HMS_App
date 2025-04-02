@@ -14,6 +14,7 @@ import 'package:hms_app/features/bus/provider/bus_provider.dart';
 import 'package:hms_app/features/complaints/provider/complaint_provider.dart';
 import 'package:hms_app/features/complaints/provider/raise_complaint_provider.dart';
 import 'package:hms_app/features/home/provider/home_provider.dart';
+import 'package:hms_app/features/notifications/provider/notification_provider.dart';
 import 'package:hms_app/features/profile/provider/profile_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,6 +49,9 @@ Future<void> initDependencies() async {
   );
   serviceLocator.registerLazySingleton<BookingProvider>(
     () => BookingProvider(serviceLocator()),
+  );
+  serviceLocator.registerLazySingleton<NotificationProvider>(
+    () => NotificationProvider(serviceLocator()),
   );
 }
 
