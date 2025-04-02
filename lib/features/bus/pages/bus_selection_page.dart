@@ -7,7 +7,9 @@ import 'package:hms_app/core/helper/sized_box_ext.dart';
 import 'package:hms_app/core/navigation/go_router.dart';
 import 'package:hms_app/core/navigation/routes.dart';
 import 'package:hms_app/core/theme/colors.dart';
+import 'package:hms_app/features/bus/models/bus_booking_model.dart';
 import 'package:hms_app/features/bus/provider/bus_provider.dart';
+import 'package:hms_app/features/bus/widgets/bus_booking_widget.dart';
 import 'package:provider/provider.dart';
 
 class BusSelectionPage extends StatefulWidget {
@@ -23,7 +25,12 @@ class _BusSelectionPageState extends State<BusSelectionPage> {
   @override
   void initState() {
     super.initState();
-    context.read<BusProvider>().getCities();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        context.read<BusProvider>().clear();
+        context.read<BusProvider>().fetchCitiesAndBookings();
+      },
+    );
   }
 
   @override
@@ -58,6 +65,7 @@ class _BusSelectionPageState extends State<BusSelectionPage> {
                 Consumer<BusProvider>(
                   builder: (context, data, child) {
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomDropDownButton(
                           onChanged: data.setSelectedCity,
@@ -79,6 +87,24 @@ class _BusSelectionPageState extends State<BusSelectionPage> {
                           title: "Search Buses",
                           textColor: Colors.white,
                         ),
+                        30.height,
+                        if (data.pastBookings.isNotEmpty)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: Dimensions.getWidth(context) * 0.75,
+                                child: Text(
+                                  "Previous Bookings",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: textTheme.headlineMedium,
+                                ),
+                              ),
+                              20.height,
+                              for (BusBookingModel bus in data.pastBookings) BusBookingWidget(bus: bus),
+                            ],
+                          ),
                       ],
                     );
                   },

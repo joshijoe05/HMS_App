@@ -17,6 +17,7 @@ class ApiEndpoints {
   static String fetchBuses = "$baseUrl/bus/students";
   static String respondToForm = "$baseUrl/bus/form/respond/";
   static String getFormDetails = "$baseUrl/bus/form-details/";
+  static String getPastBookings = "$baseUrl/bus/past-bookings";
 
   // payment
   static String initiatePayment = "$baseUrl/payment/initiate-payment";
