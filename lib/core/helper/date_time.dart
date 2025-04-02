@@ -8,7 +8,7 @@ class DateTimeHelper {
 
   static String formatIsoTo24Time(String isoDate) {
     DateTime dateTime = DateTime.parse(isoDate).toLocal();
-    return DateFormat("hh:mm").format(dateTime);
+    return DateFormat("HH:mm").format(dateTime);
   }
 
   static String formatDateToDayMonthYear(String dateStr) {

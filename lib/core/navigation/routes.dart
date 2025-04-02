@@ -14,4 +14,5 @@ class Routes {
   static const String busRoutes = '/bus-routes';
   static const String passengerInfo = '/passenger-info';
   static const String paymentValidation = '/payment-validation';
+  static const String busForm = '/bus-form';
 }
