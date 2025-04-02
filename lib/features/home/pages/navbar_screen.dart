@@ -43,10 +43,10 @@ class _TabScreenState extends State<TabScreen> {
           ),
           GButton(
             padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-            icon: Icons.person_2_rounded,
+            icon: Icons.notifications_on_outlined,
             iconColor: AppColors.primaryColor400,
             iconActiveColor: AppColors.primaryColor900,
-            text: "Profile",
+            text: "Notifications",
           ),
         ],
       ),

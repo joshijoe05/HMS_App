@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hms_app/core/common/provider/user_provider.dart';
 import 'package:hms_app/features/bus/pages/bus_selection_page.dart';
 import 'package:hms_app/features/complaints/pages/view_complaints_page.dart';
-import 'package:hms_app/features/profile/pages/profile_page.dart';
+import 'package:hms_app/features/notifications/pages/notifications_page.dart';
 
 class HomeProvider extends ChangeNotifier {
   UserProvider userProvider;
@@ -11,7 +11,7 @@ class HomeProvider extends ChangeNotifier {
   List<Widget> screens = const [
     ViewComplaintsPage(),
     BusSelectionPage(),
-    ProfilePage(),
+    NotificationsPage(),
   ];
 
   void changeIndex(int idx) {

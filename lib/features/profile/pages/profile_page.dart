@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hms_app/core/common/provider/user_provider.dart';
+import 'package:hms_app/core/common/widgets/back_button.dart';
 import 'package:hms_app/core/common/widgets/button.dart';
 import 'package:hms_app/core/helper/dimensions.dart';
 import 'package:hms_app/core/helper/sized_box_ext.dart';
@@ -37,6 +38,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const CustomBackButton(),
+                        10.height,
                         SizedBox(
                           width: Dimensions.getWidth(context) * 0.75,
                           child: Text(
