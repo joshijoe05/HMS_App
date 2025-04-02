@@ -95,12 +95,13 @@ class _NotificationsPageState extends State<NotificationsPage> {
                             : GroupedListView<NotificationModel, String>(
                                 controller: _scrollController,
                                 elements: data.notifications,
-                                groupBy: (element) => element.createdAt.toIso8601String(),
+                                groupBy: (element) =>
+                                    DateTimeHelper.formatDateToDayMonthYear(element.createdAt.toIso8601String()),
                                 groupSeparatorBuilder: (value) {
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 10),
                                     child: Text(
-                                      DateTimeHelper.formatDateToDayMonthYear(value),
+                                      value,
                                       style: textTheme.bodyMedium?.copyWith(color: AppColors.grey500),
                                     ),
                                   );

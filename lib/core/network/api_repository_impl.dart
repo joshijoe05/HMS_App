@@ -114,6 +114,9 @@ class ApiRepositoryImpl implements ApiRepository {
     }
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return response;
+    } else if (response.statusCode == 500 && jsonDecode(response.body)["message"] == "jwt expired") {
+      userProvider.refreshAccessToken();
+      throw ServerException("Session Expired.");
     } else {
       throw ServerException(jsonDecode(response.body)["message"] ?? "Something went wrong,Please try again");
     }

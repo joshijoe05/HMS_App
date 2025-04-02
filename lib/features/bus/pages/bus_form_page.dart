@@ -115,8 +115,6 @@ class _BusFormPageState extends State<BusFormPage> {
                             30.height,
                             CustomButton(
                               onTap: () async {
-                                print(selectedCity);
-                                print(selectedRelation);
                                 await data.respondToBusForm(
                                     params: BusResponseParams(
                                         destinationCity: selectedCity,
