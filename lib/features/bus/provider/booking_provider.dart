@@ -58,7 +58,7 @@ class BookingProvider extends ChangeNotifier {
       notifyListeners();
       Future.delayed(Duration(seconds: 3)).then(
         (value) {
-          router.go(Routes.navScreen);
+          router.go(Routes.splash);
         },
       );
     }
