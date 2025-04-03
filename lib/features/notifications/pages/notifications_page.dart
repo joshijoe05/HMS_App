@@ -95,6 +95,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                             : GroupedListView<NotificationModel, String>(
                                 controller: _scrollController,
                                 elements: data.notifications,
+                                order: GroupedListOrder.DESC,
                                 groupBy: (element) =>
                                     DateTimeHelper.formatDateToDayMonthYear(element.createdAt.toIso8601String()),
                                 groupSeparatorBuilder: (value) {
