@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hms_app/core/common/pages/connectivity_wrapper.dart';
@@ -18,9 +19,11 @@ import 'package:hms_app/features/notifications/provider/notification_provider.da
 import 'package:hms_app/features/profile/provider/profile_provider.dart';
 import 'package:hms_app/init_dependencies.dart';
 import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initDependencies();
   runApp(const MyApp());
 }

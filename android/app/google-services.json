@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812244468398",
+    "project_id": "hmsrgukt",
+    "storage_bucket": "hmsrgukt.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812244468398:android:0dec73f0315d65c614233f",
+        "android_client_info": {
+          "package_name": "com.example.hms_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx4vLqaZRVLh2f9Dt5ejNkAXdysNHY66w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
