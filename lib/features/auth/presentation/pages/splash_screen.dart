@@ -5,6 +5,8 @@ import 'package:hms_app/core/helper/dimensions.dart';
 import 'package:hms_app/core/helper/sized_box_ext.dart';
 import 'package:hms_app/core/navigation/go_router.dart';
 import 'package:hms_app/core/navigation/routes.dart';
+import 'package:hms_app/core/services/notification_service.dart';
+import 'package:hms_app/init_dependencies.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late UserProvider userProvider;
+  NotificationServices notificationServices = serviceLocator<NotificationServices>();
 
   Future<void> navigate() async {
     bool goHome = await Future.wait([
@@ -31,10 +34,22 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
+  Future<void> notificationInit() async {
+    await notificationServices.requestNotificationPermisions();
+    notificationServices.forgroundMessage();
+    notificationServices.firebaseInit(context);
+    notificationServices.setupInteractMessage(context);
+    notificationServices.isRefreshToken();
+    // notificationServices.getDeviceToken().then((value) {
+    //   debugPrint(value);
+    // });
+  }
+
   @override
   void initState() {
     super.initState();
     userProvider = context.read<UserProvider>();
+    notificationInit();
     navigate();
   }
 

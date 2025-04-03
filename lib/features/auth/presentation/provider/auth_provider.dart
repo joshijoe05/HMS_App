@@ -4,6 +4,7 @@ import 'package:hms_app/core/common/provider/user_provider.dart';
 import 'package:hms_app/core/helper/snackbar.dart';
 import 'package:hms_app/core/navigation/go_router.dart';
 import 'package:hms_app/core/navigation/routes.dart';
+import 'package:hms_app/core/services/notification_service.dart';
 import 'package:hms_app/features/auth/domain/entities/hostel_entity.dart';
 import 'package:hms_app/features/auth/domain/usecases/user_login.dart';
 import 'package:hms_app/features/auth/domain/usecases/user_sign_up.dart';
@@ -16,12 +17,14 @@ class AuthProvider extends ChangeNotifier {
   SharedPreferences prefs;
   UserLogin userLogin;
   HostelProvider hostelProvider;
+  NotificationServices notificationServices;
   AuthProvider(
     this.userSignUp,
     this.prefs,
     this.userProvider,
     this.userLogin,
     this.hostelProvider,
+    this.notificationServices,
   );
 
   bool showPassword = false;
@@ -117,8 +120,10 @@ class AuthProvider extends ChangeNotifier {
         prefs.setString("refreshToken", r['data']['refreshToken']);
         prefs.setString("name", r['data']['user']['fullName']);
         prefs.setString("email", r['data']['user']['email']);
+        prefs.setString("hostelId", r['data']['user']['hostelId']);
         userProvider.loadTokens();
         clearLoginData();
+        notificationServices.subscribeToHostelNoti();
         router.go(Routes.navScreen);
         return true;
       },

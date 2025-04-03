@@ -5,17 +5,19 @@ import 'package:hms_app/core/constants/api_endpoints.dart';
 import 'package:hms_app/core/helper/jwt_helper.dart';
 import 'package:hms_app/core/navigation/go_router.dart';
 import 'package:hms_app/core/navigation/routes.dart';
+import 'package:hms_app/core/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class UserProvider extends ChangeNotifier {
+  SharedPreferences prefs;
+  NotificationServices notificationServices;
   String? _accessToken;
   String? _refreshToken;
-  SharedPreferences prefs;
   String? userName;
   String? email;
 
-  UserProvider(this.prefs) {
+  UserProvider(this.prefs, this.notificationServices) {
     loadTokens();
   }
 
@@ -36,6 +38,7 @@ class UserProvider extends ChangeNotifier {
     await prefs.remove("accessToken");
     await prefs.remove("refreshToken");
     await prefs.clear();
+    await notificationServices.unSubscribeToHostelNoti();
     EasyLoading.dismiss();
     router.go(Routes.login);
   }

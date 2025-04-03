@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hms_app/core/common/provider/user_provider.dart';
 import 'package:hms_app/core/network/api_repository.dart';
 import 'package:hms_app/core/network/api_repository_impl.dart';
+import 'package:hms_app/core/services/notification_service.dart';
 import 'package:hms_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:hms_app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:hms_app/features/auth/domain/repositories/auth_repository.dart';
@@ -26,8 +27,11 @@ Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton<SharedPreferences>(
     () => prefs,
   );
+  serviceLocator.registerLazySingleton<NotificationServices>(
+    () => NotificationServices(),
+  );
   serviceLocator.registerLazySingleton<UserProvider>(
-    () => UserProvider(prefs),
+    () => UserProvider(prefs, serviceLocator()),
   );
   serviceLocator.registerFactory<ApiRepository>(
     () => ApiRepositoryImpl(serviceLocator()),
@@ -78,6 +82,7 @@ void _initAuth() {
     )
     ..registerLazySingleton<AuthProvider>(
       () => AuthProvider(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
